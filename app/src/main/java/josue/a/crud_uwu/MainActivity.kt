@@ -2,12 +2,16 @@ package josue.a.crud_uwu
 
 import Modelo.ClaseConexión
 import android.os.Bundle
+import android.widget.Adapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -27,6 +31,13 @@ class MainActivity : AppCompatActivity() {
         val txtPrecio = findViewById<EditText>(R.id.txtPrecio)
         val txtCantidad = findViewById<EditText>(R.id.txtCantidad)
         val btnAgregar = findViewById<Button>(R.id.btnAgregar)
+        val RecyclerView = findViewById<RecyclerView>(R.id.rcvDatos)
+        //poner layout al recycleview
+        RecyclerView.layoutManager = LinearLayoutManager(this)
+
+        //Crear un adaptadot
+
+        val miAdapdador = Adaptador(listaDeDatos)
 
         btnAgregar.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO){
@@ -40,7 +51,12 @@ class MainActivity : AppCompatActivity() {
                 addPrducto.setInt(2, txtPrecio.text.toString().toInt())
                 addPrducto.setInt(3, txtCantidad.text.toString().toInt())
                 addPrducto.executeUpdate()
+            //Mostrar datos
             }
         }
     }
+}
+
+class Adaptador(private val Datos: Array<String>){
+    
 }
